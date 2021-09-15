@@ -8,4 +8,5 @@ Because it didn’t get the context.
 
 Jūsų paaiškinimas:
 
+Nes context buvo nurodytas/importuotas blogam elementui ir tas component negalejo pasiimti context.
 */
