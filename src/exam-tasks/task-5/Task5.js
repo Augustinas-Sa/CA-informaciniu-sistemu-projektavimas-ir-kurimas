@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 function Task5() {
+  // Hooks
+
+  // Refs
+  const lightButtonRef = useRef();
+  const darkButtonRef = useRef();
+
+  // Custom functions
+  const lighttheme = () => {
+    lightButtonRef.current.style.background = '#f1f1f1';
+    lightButtonRef.current.style.color = '#000000';
+  };
+
+  const darktheme = () => {
+    darkButtonRef.current.style.background = '#000000';
+    darkButtonRef.current.style.color = '#f1f1f1';
+  };
   return (
-    <div>
+    <div ref={(lightButtonRef, darkButtonRef)}>
       <h3>Task 5</h3>
+      <p>Light theme</p>
+      <p>Dark theme</p>
+      <button onClick={lighttheme}>Light theme</button>
+      <button onClick={darktheme}>Dark theme</button>
     </div>
   );
 }
