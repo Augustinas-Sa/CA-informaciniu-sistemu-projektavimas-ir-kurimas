@@ -1,13 +1,41 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import CompA from './CompA';
 import CompB from './CompB';
 
+export const ButtonsContext = React.createContext();
+
+// useReducer initialState
+let initialState = { count: 0, message: '' };
+// useReducer reducer function (describes how state should change)
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      if (state.count < 10) return { ...state, count: state.count + 1 };
+      return { ...state, message: 'Reached max: 10' };
+    case 'DECREMENT':
+      if (state.count === 10) return { count: state.count - 1, message: '' };
+      return { ...state, count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
 function Task6() {
+  // hooks
+  // - state
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
     <div>
       <h3>Task 6</h3>
-      {/*<CompA />*/}
-      {/*<CompB />*/}
+      <ButtonsContext.Provider value={{ dispatch }}>
+        <h1>
+          Buttons clicked <u>{state.clicks}</u>
+        </h1>
+        <CompA />
+        <CompB />
+        <p>{state.message}</p>
+      </ButtonsContext.Provider>
     </div>
   );
 }
@@ -26,7 +54,7 @@ Task6 komponentų medis
 
 Task6 viduje bus sukurtas Counter state'as, kuri bus galima valdyti iš CompA1 ir CompB
 State'as bus valdomas su mygtkais, kurie leis state'ą padidinti 10 taškų arba pamažinti 10.
-State'ui pasiekus 100, bus draudžiama didinti state'ą ir pasirodys pranešimas "Didinti nebegalima"
+State'ui pasiekus 10, bus draudžiama didinti state'ą ir pasirodys pranešimas "Didinti nebegalima"
 
 Pastaba: naudokite useState, useContext (Context API).
 
