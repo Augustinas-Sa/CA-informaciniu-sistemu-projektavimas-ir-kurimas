@@ -1,10 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Task1() {
   return (
-    <div>
-      <h3>Task 1</h3>
-    </div>
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to='/'>About Us</Link>
+          </li>
+          <li>
+            <Link to='/contacts'>Contacts</Link>
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 }
 
